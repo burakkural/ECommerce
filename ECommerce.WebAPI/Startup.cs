@@ -1,6 +1,11 @@
+using ECommerce.DataAccess.Abstract;
+using ECommerce.DataAccess.Concrete.Contexts;
+using ECommerce.DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +30,9 @@ namespace ECommerce.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddDbContext<ECommerceContext>(opts => opts.UseSqlServer("Server=BURAK\\SQLEXPRESS;Database=ECommerceDb;Trusted_Connection=True;", options => options.MigrationsAssembly("ECommerce.DataAccess").MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
+            services.AddTransient<IUserDal,EfUserDal>();
+            //services.AddTransient<IUserService, UserService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
