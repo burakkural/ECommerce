@@ -63,7 +63,8 @@ namespace ECommerce.Bussines.Concrete
                 UserName = user.UserName,
                 Address = user.Address,
                 Email = user.Email,
-                Id = user.Id
+                Id = user.Id,
+                Password = user.Password
 
             };
         }
@@ -78,7 +79,7 @@ namespace ECommerce.Bussines.Concrete
                 {
                     FirstName = item.FirstName,
                     LastName = item.LastName,
-                    Gender = item.Gender == true ? "Erkek" : "Kadın",
+                    Gender = item.Gender,
                     DateOfBirth = item.DateOfBirth,
                     UserName = item.UserName,
                     Address = item.Address,

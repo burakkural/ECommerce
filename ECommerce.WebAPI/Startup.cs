@@ -1,3 +1,5 @@
+using ECommerce.Bussines.Abstract;
+using ECommerce.Bussines.Concrete;
 using ECommerce.DataAccess.Abstract;
 using ECommerce.DataAccess.Concrete.Contexts;
 using ECommerce.DataAccess.Concrete.EntityFramework;
@@ -32,7 +34,7 @@ namespace ECommerce.WebAPI
         {
             services.AddDbContext<ECommerceContext>(opts => opts.UseSqlServer("Server=BURAK\\SQLEXPRESS;Database=ECommerceDb;Trusted_Connection=True;", options => options.MigrationsAssembly("ECommerce.DataAccess").MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
             services.AddTransient<IUserDal,EfUserDal>();
-            //services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
